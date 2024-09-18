@@ -1,91 +1,18 @@
-import React, { useState, useEffect } from "react";
+import TypingAnimation from "./TypingAnimation";
 import Image from "../assets/Image.jpg";
+import React from "react";
 
-const TypingAnimation = ({ text, speed = 100 }) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [titleIndex, setTitleIndex] = useState(0);
-  const typingSpeed = 100;
-  const pauseTime = 2000;
-
-  useEffect(() => {
-    let typingTimeout;
-    const titles = [
-      "FullStack Developer",
-      "MERN Stack Developer",
-      "Backend Developer",
-      "Frontend Developer",
-    ];
-    const currentText = titles[titleIndex];
-
-    const typeText = () => {
-      if (!isDeleting) {
-        if (currentIndex < currentText.length) {
-          setDisplayedText((prev) => prev + currentText.charAt(currentIndex));
-          setCurrentIndex((prevIndex) => prevIndex + 1);
-        } else {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-        }
-      } else {
-        if (currentIndex > 0) {
-          setDisplayedText((prev) => prev.slice(0, -1));
-          setCurrentIndex((prevIndex) => prevIndex - 1);
-        } else {
-          setIsDeleting(false);
-          setTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-        }
-      }
-    };
-
-    typingTimeout = setTimeout(typeText, typingSpeed);
-
-    return () => clearTimeout(typingTimeout);
-  }, [currentIndex, isDeleting, titleIndex]);
-
-  return (
-    <div className="text-gray-600 text-2xl font-semibold transition-opacity duration-700 ease-in-out">
-      {displayedText}
-    </div>
-  );
-};
 
 const StaticHeading = () => {
-  // Ripple effect state
-  const [clickCoords, setClickCoords] = useState({ x: -1, y: -1 });
-
-  // Handle click event for ripple effect
-  const handleClick = (e) => {
-    setClickCoords({ x: e.clientX, y: e.clientY });
-
-    // Reset the ripple after animation
-    setTimeout(() => {
-      setClickCoords({ x: -1, y: -1 });
-    }, 1000);
-  };
-
   return (
-    <div
-      className="h-screen bg-gradient-to-r from-gray-200 to-gray-400 flex flex-col md:flex-row items-center justify-center relative overflow-hidden"
-      onClick={handleClick}
-    >
-      {/* Custom Floating Animation */}
+    <div className="h-screen  flex flex-col md:flex-row items-center justify-center relative overflow-hidden">
+      {/* Floating Animation Circles */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="w-96 h-96 bg-purple-300 opacity-70 rounded-full absolute floating-animation left-[-20%] top-1/3"></div>
-        <div className="w-80 h-80 bg-teal-300 opacity-60 rounded-full absolute floating-animation right-[-20%] top-1/4"></div>
-        <div className="w-72 h-72 bg-pink-300 opacity-70 rounded-full absolute floating-animation top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]"></div>
+        <div className="w-96 h-96 bg-purple-400 opacity-80 rounded-full absolute floating-animation left-[-10%] top-2/3"></div>
+        <div className="w-80 h-80 bg-teal-300 opacity-80 rounded-full absolute floating-animation right-[-10%] top-2/4"></div>
+        <div className="w-80 h-80 bg-orange-400 opacity-70 rounded-full absolute floating-animation right-[-10%] transform translate-x-[-85%] translate-y-[-70%] "></div>
+        <div className="w-80 h-80 bg-pink-300 opacity-70 rounded-full absolute floating-animation top-1/2 left-1/2 transform translate-x-[-85%] translate-y-[-60%]"></div>
       </div>
-
-      {/* Ripple effect on click */}
-      {clickCoords.x !== -1 && (
-        <span
-          className="ripple-effect"
-          style={{
-            left: clickCoords.x,
-            top: clickCoords.y,
-          }}
-        />
-      )}
 
       {/* Image Section */}
       <div className="relative z-10 flex-shrink-0 mr-0 md:mr-8 mb-6 md:mb-0 hover:scale-110 transition-transform duration-500">
@@ -100,17 +27,17 @@ const StaticHeading = () => {
 
       {/* Text Section */}
       <div className="text-center md:text-left relative z-10">
-        <h1 className="text-gray-800 text-5xl font-bold transition-transform duration-700 ease-in-out hover:text-indigo-500">
+        <h1 className="text-gray-800 text-7xl font-bold from-neutral-950 hover:scale-110 transition-transform duration-500">
           Pratik Kadam
         </h1>
         <TypingAnimation />
-        <div className="flex justify-center md:justify-start space-x-4 mt-4">
+        <div className="flex justify-center md:justify-start space-x-4 mt-4 ">
           {/* Social Media Icons */}
           <a
             href="https://github.com/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 hover:text-gray-800"
+            className="text-gray-600 hover:text-gray-800 hover:scale-125 transition-transform duration-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +52,7 @@ const StaticHeading = () => {
             href="https://linkedin.com/in/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 hover:text-gray-800"
+            className="text-gray-600 hover:text-gray-800 hover:scale-125 transition-transform duration-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
